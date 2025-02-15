@@ -108,11 +108,13 @@ h1 {
     font-size: 1.2em;
 }
 
+/* Social Media Section */
 .medsos {
-    margin: 20px auto;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 15px;
+    margin: 20px 0;
 }
 
 .medsos a {
@@ -125,7 +127,7 @@ h1 {
     font-weight: 600;
     padding: 12px 20px;
     border-radius: 12px;
-    transition: background 0.3s, transform 0.2s;
+    transition: transform 0.2s;
 }
 
 .medsos a img {
@@ -142,79 +144,6 @@ h1 {
 .youtube { background: #FF0000; }
 .whatsapp { background: #25D366; }
 
-.message-container {
-    margin: 40px auto;
-    padding: 30px;
-    width: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(10px);
-}
-
-.message-container h2 {
-    margin-bottom: 20px;
-    font-weight: 700;
-    font-size: 1.8em;
-}
-
-.message-container input, .message-container textarea {
-    width: 100%;
-    padding: 14px;
-    margin: 12px 0;
-    border: none;
-    border-bottom: 2px solid white;
-    font-size: 1.2rem;
-    background: transparent;
-    color: white;
-    outline: none;
-}
-
-.message-container textarea {
-    resize: none;
-    height: 120px;
-}
-
-.message-container button {
-    width: 100%;
-    padding: 14px;
-    background: linear-gradient(to right, #ff9966, #ff5e62);
-    color: white;
-    font-size: 1.2em;
-    font-weight: bold;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: transform 0.2s, background 0.3s;
-}
-
-.message-container button:hover {
-    transform: scale(1.05);
-    background: linear-gradient(to right, #ff5e62, #ff9966);
-}
-
-.messages {
-    margin-top: 20px;
-    text-align: left;
-    max-height: 350px;
-    overflow-y: auto;
-    padding-right: 10px;
-}
-
-.message {
-    background: rgba(255, 255, 255, 0.15);
-    padding: 18px;
-    margin: 12px 0;
-    border-radius: 10px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-.message strong {
-    display: block;
-    font-size: 1.3em;
-    font-weight: 600;
-    color: #ffcc33;
-}
 
 /* Responsiveness */
 @media (max-width: 768px) {
@@ -223,6 +152,14 @@ h1 {
     }
     .slider-container, .video-container {
         max-width: 90%;
+    }
+    .medsos {
+        flex-direction: column;
+        align-items: center;
+    }
+    .medsos a {
+        width: 80%;
+        text-align: center;
     }
 }
 
