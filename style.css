@@ -12,6 +12,7 @@ body {
     box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
     position: relative;
     overflow: hidden;
+    max-width: 100%;
 }
 .header::before {
     content: '';
@@ -24,55 +25,90 @@ body {
     transform: translateX(-50%) translateY(-50%) rotate(25deg);
 }
 h1 {
-    font-size: 3.8em;
+    font-size: 3em;
     margin-bottom: 10px;
     position: relative;
     z-index: 1;
     text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    max-width: 100%;
 }
 .subtitle, .name {
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-weight: lighter;
     opacity: 0.9;
     position: relative;
     z-index: 1;
 }
 .name {
-    font-size: 2.2em;
+    font-size: 1.8em;
     font-weight: bold;
     margin-top: 10px;
 }
 .content {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: nowrap; /* Mencegah elemen turun ke bawah */
+    justify-content: flex-start; /* Biarkan elemen tetap di satu baris */
     align-items: center;
     gap: 15px;
     width: 100%;
-    padding: 30px 10px;
+    padding: 20px 10px;
     background: rgba(0, 0, 0, 0.2);
     box-shadow: inset 0px 0px 20px rgba(255,255,255,0.1);
     border-radius: 10px;
+    overflow-x: auto; /* Jika layar kecil, scroll horizontal */
+    scroll-snap-type: x mandatory;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        align-items: center;
+    }
+    .slider-container, .video-container {
+        width: 90%;
+    }
+}
+@media (min-width: 769px) {
+    .content {
+        flex-direction: row;
+        justify-content: center;
+    }
+    .slider-container, .video-container {
+        width: 30%;
+    }
 }
 .slider-container, .video-container {
-    flex: 1;
+    flex: 1; /* Membagi ruang secara proporsional */
+    max-width: 50%; /* Pastikan tidak lebih dari setengah layar */
+    min-width: 300px; /* Agar tidak terlalu kecil di layar kecil */
     overflow: hidden;
     position: relative;
-    max-width: 22%;
     border-radius: 15px;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s;
 }
+
+.slider-container, .video-container {
+    flex: 0 0 auto; /* Agar elemen tidak berubah ukuran */
+    min-width: 250px; /* Ukuran minimum agar tidak terlalu kecil */
+    max-width: 30%; /* Membatasi ukuran maksimum */
+    overflow: hidden;
+    position: relative;
+    border-radius: 15px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s;
+    scroll-snap-align: start;
+}
+
 .slider-container:hover, .video-container:hover {
     transform: scale(1.05);
 }
-.video-container {
-    max-width: 35%;
-}
+
 .slider {
     display: flex;
     transition: transform 0.5s ease-in-out;
 }
+
 .slider img, .video-container video {
     width: 100%;
     height: auto;
@@ -83,29 +119,32 @@ h1 {
     padding: 20px;
     background: rgba(30, 60, 114, 0.8);
     text-align: center;
-    font-size: 1.2em;
+    font-size: 1em;
 }
 .medsos {
     margin: 20px auto;
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 .medsos a {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 5px;
     text-decoration: none;
     color: white;
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: 600;
-    padding: 12px 20px;
+    padding: 10px 15px;
     border-radius: 12px;
     transition: background 0.3s, transform 0.2s;
+    min-width: 120px;
+    max-width: 200px;
 }
 .medsos a img {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
 }
 .medsos a:hover {
     transform: scale(1.1);
@@ -115,52 +154,45 @@ h1 {
 .youtube { background: #FF0000; }
 .whatsapp { background: #25D366; }
 .message-container {
-    margin: 40px auto;
-    padding: 30px;
-    width: 50%;
+    margin: 20px auto;
+    padding: 20px;
+    width: 90%;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 15px;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(10px);
-}
-.message-container {
-    margin: 40px auto;
-    padding: 30px;
-    width: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(10px);
+    max-width: 600px;
+    min-width: 300px;
 }
 .message-container h2 {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     font-weight: 700;
-    font-size: 1.8em;
+    font-size: 1.5em;
 }
 .message-container input, .message-container textarea {
     width: 100%;
-    padding: 14px;
-    margin: 12px 0;
+    padding: 12px;
+    margin: 8px 0;
     border: none;
     border-bottom: 2px solid white;
-    font-size: 1.2rem;
+    font-size: 1em;
     background: transparent;
     color: white;
     outline: none;
 }
 .message-container textarea {
     resize: none;
-    height: 120px;
+    height: 100px;
 }
 .message-container button {
     width: 100%;
-    padding: 14px;
+    padding: 12px;
     background: linear-gradient(to right, #ff9966, #ff5e62);
     color: white;
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: bold;
     border: none;
-    border-radius: 12px;
+    border-radius: 10px;
     cursor: pointer;
     transition: transform 0.2s, background 0.3s;
 }
@@ -169,22 +201,22 @@ h1 {
     background: linear-gradient(to right, #ff5e62, #ff9966);
 }
 .messages {
-    margin-top: 20px;
+    margin-top: 15px;
     text-align: left;
-    max-height: 350px;
+    max-height: 300px;
     overflow-y: auto;
     padding-right: 10px;
 }
 .message {
     background: rgba(255, 255, 255, 0.15);
-    padding: 18px;
-    margin: 12px 0;
-    border-radius: 10px;
+    padding: 15px;
+    margin: 8px 0;
+    border-radius: 8px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
 }
 .message strong {
     display: block;
-    font-size: 1.3em;
+    font-size: 1.1em;
     font-weight: 600;
     color: #ffcc33;
 }
